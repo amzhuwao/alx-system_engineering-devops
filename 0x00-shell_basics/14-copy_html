@@ -1,2 +1,31 @@
 #!/bin/bash
-cp .html ../
+
+# Get the current working directory
+current_directory=$(pwd)
+
+# Get the parent directory
+parent_directory=$(dirname $current_directory)
+
+# Get a list of all HTML files in the current directory
+html_files=$(find . -type f -name "*.html")
+
+# For each HTML file, check if it exists in the parent directory
+for html_file in $html_files; do
+
+# Get the full path to the HTML file
+  full_path_to_html_file=$current_directory/$html_file
+
+# Get the full path to the HTML file in the parent directory
+  parent_directory_html_file=$parent_directory/$html_file
+
+# Check if the HTML file exists in the parent directory
+  if [ ! -f $parent_directory_html_file ]; then
+
+ # The HTML file does not exist in the parent directory, so copy it
+   cp $full_path_to_html_file $parent_directory
+
+ # Check if the HTML file in the parent directory is older than the HTML file in the current directory
+  elif [ $(stat -c %y $full_path_to_html_file) -gt $(stat -c %y $parent_directory_html_file) ]; then
+
+# The HTML file in the parent directory is older than the HTML file in the current directory, so update it
+cp $full_path_to_html_file $parent_directory
