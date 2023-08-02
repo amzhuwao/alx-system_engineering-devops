@@ -1,2 +1,2 @@
 #!/bin/bash
-echo "$(ls -ahl)"
+ls -all -n
