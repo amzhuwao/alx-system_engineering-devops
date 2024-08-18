@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [ "$EUID" -ne 0 ]; then
+    echo "Please run as root to see all listening ports."
+    exit 1
+fi
+
+echo "Listing all listening ports with corresponding PID and program name:"
+echo "---------------------------------------------------------------"
+netstat -tulnp | grep LISTEN
