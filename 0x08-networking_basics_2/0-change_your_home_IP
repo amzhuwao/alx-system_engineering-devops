@@ -1,0 +1,14 @@
+#!/bin/bash
+# Backup the original /etc/hosts file (optional but recommended)
+cp /etc/hosts /etc/hosts.bak
+
+# Update /etc/hosts with desired entries
+echo "127.0.0.2 localhost" >> /etc/hosts
+echo "8.8.8.8 facebook.com" >> /etc/hosts
+
+echo "Updated /etc/hosts file."
+
+# Flush DNS cache (optional, may not be necessary)
+systemctl restart systemd-resolved
+
+echo "DNS cache flushed (optional)."
