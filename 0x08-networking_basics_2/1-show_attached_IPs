@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Get a list of all network interfaces
+IFS='
+'
+interfaces=($(ip addr show | grep 'state UP' | cut -d ' ' -f2))
+
+# Iterate over each interface and print its IPv4 addresses
+for interface in "${interfaces[@]}"; do
+  ip addr show "$interface" | grep 'inet ' | awk '{print $2}' | cut -d '/' -f1 | sed 's/addr://'
+done

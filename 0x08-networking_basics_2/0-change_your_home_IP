@@ -2,6 +2,9 @@
 # Backup the original /etc/hosts file (optional but recommended)
 cp /etc/hosts /etc/hosts.bak
 
+# Remove the default localhost entry (if it exists)
+sed -i '127.0.0.1 localhost' /etc/hosts
+
 # Update /etc/hosts with desired entries
 echo "127.0.0.2 localhost" >> /etc/hosts
 echo "8.8.8.8 facebook.com" >> /etc/hosts
